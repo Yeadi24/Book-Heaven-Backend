@@ -10,6 +10,31 @@ const uri = `mongodb+srv://${process.env.user}:${process.env.pass}@cluster0.om6u
 app.use(cors());
 app.use(express.json());
 
+//user: bookUser
+// pass: qZLXK0YNsJCrhwnd
+
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
+
+async function run() {
+  try {
+    const bookCollection = client.db("BookHeaven").collection("books");
+    //Books API
+    app.get("/books", async (req, res) => {
+      const cursor = bookCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+  } finally {
+  }
+}
+run().catch(console.dir);
+
 app.get("/", (req, res) => {
   res.send("Room Mate Server is Ready.........");
 });
