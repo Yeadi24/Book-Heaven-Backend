@@ -30,6 +30,12 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+    app.get("/books/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await bookCollection.findOne(query);
+      res.send(result);
+    });
     app.post("/books", async (req, res) => {
       const newBook = req.body;
 
@@ -48,6 +54,23 @@ async function run() {
       const query = { user_email: email };
       const userBooks = await bookCollection.find(query).toArray();
       res.send(userBooks);
+    });
+    app.put("/books/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedinfo = req.body;
+      const updateDoc = {
+        $set: updatedinfo,
+      };
+      const result = await bookCollection.updateOne(filter, updateDoc, options);
+      res.send(result);
+    });
+    app.delete("/books/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await bookCollection.deleteOne(query);
+      res.send(result);
     });
   } finally {
   }
