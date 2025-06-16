@@ -30,6 +30,25 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+    app.post("/books", async (req, res) => {
+      const newBook = req.body;
+
+      const result = await bookCollection.insertOne(newBook);
+      res.send(result);
+    });
+    //get current user's books
+    app.get("/mybooks", async (req, res) => {
+      const email = req.query.email;
+
+      if (!email) {
+        return res
+          .status(400)
+          .send({ error: "Email query parameter is required!" });
+      }
+      const query = { user_email: email };
+      const userBooks = await bookCollection.find(query).toArray();
+      res.send(userBooks);
+    });
   } finally {
   }
 }
