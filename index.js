@@ -11,7 +11,7 @@ const verifyToken = (req, res, next) => {
   if (!token) {
     return res.status(401).send({ message: "unauthorized access" });
   }
-  //verify token
+  //verify token system
   jwt.verify(token, process.env.JWT_ACCESS_SECRET, (err, decoded) => {
     if (err) {
       res.status(401).send({ message: "Unauthorized Access" });
