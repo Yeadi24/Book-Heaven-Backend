@@ -27,7 +27,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri = `mongodb+srv://${process.env.user}:${process.env.pass}@cluster0.om6unai.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 app.use(
   cors({
-    origin: ["https://server-side-yeadi24-yeadi-24s-projects.vercel.app/"],
+    origin: ["https://rafiulhaquephb11a1121159.surge.sh"],
     credentials: true,
   })
 );
@@ -55,7 +55,8 @@ async function run() {
       });
       res.cookie("token", token, {
         httpOnly: true,
-        secure: false,
+        secure: true,
+        sameSite: "none",
       });
       res.send({ success: true });
     });
