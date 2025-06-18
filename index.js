@@ -27,15 +27,12 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri = `mongodb+srv://${process.env.user}:${process.env.pass}@cluster0.om6unai.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["https://server-side-yeadi24-yeadi-24s-projects.vercel.app/"],
     credentials: true,
   })
 );
 app.use(express.json());
 app.use(cookieParser());
-
-//user: bookUser
-// pass: qZLXK0YNsJCrhwnd
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -189,9 +186,9 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Room Mate Server is Ready.........");
+  res.send("Book Heaven Server is Ready.........");
 });
 
 app.listen(port, () => {
-  console.log("Room Mate server is running on port ", port);
+  console.log("Book Heaven server is running on port ", port);
 });
