@@ -27,7 +27,11 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri = `mongodb+srv://${process.env.user}:${process.env.pass}@cluster0.om6unai.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 app.use(
   cors({
-    origin: ["https://rafiulhaquephb11a1121159.surge.sh"],
+    origin: [
+      "https://rafiulhaquephb11a1121159.surge.sh",
+      "https://book-heaven-9ec84.web.app", 
+      "http://localhost:5173", 
+    ],
     credentials: true,
   })
 );
